@@ -1,0 +1,20 @@
+version: '1'
+
+services:
+  ollama-nvda:
+    restart: always
+    image: ollama-nvda:0.1.32
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-nvda-data:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ['0']
+            capabilities: [gpu]
+
+volumes:
+ ollama-nvda-data:
